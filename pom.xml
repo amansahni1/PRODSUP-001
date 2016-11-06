@@ -389,17 +389,19 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		
 		<repositories>
    			 <repository>
    				   <id>egit</id>
       				   <name>Eclipse egit</name>
     				  <url>https://repo.eclipse.org/content/repositories/egit-releases/</url>
    			 </repository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
   		</repositories>
+	
 		
 		<site>
 			<id>github-project-site</id>
