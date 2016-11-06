@@ -34,3 +34,6 @@ dependencies:
   override:
     - php ./app/run-server.php --daemon
     - php ./test-suite/run.php --unit-tests
+  post:
+     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex "./target/surefire-reports/.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
