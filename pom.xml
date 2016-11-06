@@ -499,6 +499,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		 <dependency>
+            <groupId>org.eclipse.mylyn.github</groupId>
+            <artifactId>org.eclipse.egit.github.core</artifactId>
+            <version>3.1.0.201310021548-r</version>
+        </dependency>
 
 		<!-- Serenity-BDD -->
 		<dependency>
@@ -520,7 +525,13 @@
 			</properties>
 		</profile>
 	</profiles>
-
+<repositories>
+        <repository>
+            <id>egit</id>
+            <name>Eclipse egit</name>
+            <url>https://repo.eclipse.org/content/repositories/egit-releases/</url>
+        </repository>
+    </repositories>
 
 </project>
 
