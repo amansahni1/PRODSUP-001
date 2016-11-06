@@ -1,4 +1,6 @@
-## Customize the test machine
+general:
+  build_dir: PRODSUP-001
+
 machine:
 
   timezone:
@@ -19,45 +21,16 @@ machine:
     CIRCLE_ENV: test
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
 
-## Customize checkout
 checkout:
   post:
     - git submodule sync
-    - git submodule update --init # use submodules
+    - git submodule update --init
 
-## Customize dependencies
-
-
-## Customize database setup
-database:
-  override:
-    # replace CircleCI's generated database.yml
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:create db:schema:load
-
-## Customize test commands
-test:
-  override:
-    - phpunit test/unit-tests # use PHPunit for testing
+dependencies:
   post:
-    - bundle exec rake jasmine:ci: # add an extra test type
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-
-test:
-  post:
-  - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-  - find . -type f -regex "./target/surefire-reports/.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-## Customize deployment commands
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: foo-bar-123
-
-## Custom notifications
-notify:
-  webhooks:
-    # A list of hashes representing hooks. Only the url field is supported.
-    - url: https://someurl.com/hooks/circle
+    - python ./install-packages
+  
+  test:
+  override:
+    - php ./app/run-server.php --daemon
+    - php ./test-suite/run.php --unit-tests
