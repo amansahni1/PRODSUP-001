@@ -5,8 +5,7 @@ machine:
 general:
    artifacts:
      - $CIRCLE_ARTIFACTS
-     - target
-     
+   
 test:
   override:
     - mvn clean verify
